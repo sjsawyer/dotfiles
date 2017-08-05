@@ -1,0 +1,44 @@
+" sjsawyer's vimrc file
+"
+" URL: http://github.com/sjsawyer/vim/vimrc
+" Author: Shaun Sawyer
+" Descripion:
+"     The goal of this vimrc file is to be both minimalistic but functional.
+"     That is, include a lot of nice features but in a way as to not overload
+"     vim with unnecessary plugins etc. We will see how that goes. Perhaps I
+"     will just end up adding a clusterf*** of plugins.
+"
+" Credit:
+"     Largely inspired by Max Cantor's talk from the NYC Vim Meetup,
+"     'How to Do 90% of What Plugins Do with just Vim'
+"
+
+" Don't act like Vi
+set nocompatible
+
+" Enable syntax highlighting
+syntax enable
+filetype plugin on
+
+" A common remapping of the leader key for extra functionality
+" Referred to as <leader>
+:let mapleader = ","
+
+" Search into subdirectories
+set path+=**
+
+" Display all matching filetypes upon tab completion
+set wildmenu
+
+" Enable tag matching upon <C-]> (e.g. with ctags)
+set tags+=tags;$HOME
+
+
+"----------------------------------------------------------------------------
+" Python Specific
+"----------------------------------------------------------------------------
+
+" Low maintenance snippet manager
+nnoremap ,pdb :-1read ./snippets/python/pdb<CR>$
+nnoremap ,main :-1read ./snippets/python/main<CR>2j$i
+
