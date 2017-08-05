@@ -163,6 +163,6 @@ call matchadd('ColorColumn', '\%81v', 100)
 "----------------------------------------------------------------------------
 
 " Low maintenance snippet manager
-nnoremap ,pdb :-1read ./snippets/python.pdb<CR>$
-nnoremap ,main :-1read ./snippets/python.main<CR>2j$i
+nnoremap ,pdb :-1read ./vim/snippets/python.pdb<CR>$
+nnoremap ,main :-1read ./vim/snippets/python.main<CR>2j$i
 
