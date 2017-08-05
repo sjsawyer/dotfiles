@@ -1,0 +1,4 @@
+TODO:
+
+Add setup script to install necessary dependencies (vundle, ctags) and
+symlink dotfiles to ~/
