@@ -9,8 +9,15 @@
 "     will just end up adding a clusterf*** of plugins.
 "
 " Credit:
-"     Largely inspired by Max Cantor's talk from the NYC Vim Meetup,
-"     'How to Do 90% of What Plugins Do with just Vim'
+"
+"     Max Cantor's talk from the NYC Vim Meetup,
+"         'How to Do 90% of What Plugins Do with just Vim'
+"         https://www.youtube.com/watch?v=XA2WjJbmmoM
+" 
+"     Martin Brochaus' talk at PyCon Asia Pacific 2012 Conference,
+"         'Vim as a Python IDE'
+"         https://www.youtube.com/watch?v=YhqsjUUHj6g
+"     
 "
 
 " Don't act like Vi
@@ -39,6 +46,6 @@ set tags+=tags;$HOME
 "----------------------------------------------------------------------------
 
 " Low maintenance snippet manager
-nnoremap ,pdb :-1read ./snippets/python/pdb<CR>$
-nnoremap ,main :-1read ./snippets/python/main<CR>2j$i
+nnoremap ,pdb :-1read ./snippets/python.pdb<CR>$
+nnoremap ,main :-1read ./snippets/python.main<CR>2j$i
 
