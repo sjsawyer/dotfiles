@@ -1,5 +1,5 @@
-" sjsawyer's vimrc file
-"
+colorscheme sweyla941432
+
 " URL: http://github.com/sjsawyer/vim/vimrc
 " Author: Shaun Sawyer
 " Descripion:
@@ -9,6 +9,8 @@
 "     will just end up adding a clusterf*** of plugins.
 "
 " Credit:
+"
+"     http://vim.wikia.com/wiki/Example_vimrc
 "
 "     Max Cantor's talk from the NYC Vim Meetup,
 "         'How to Do 90% of What Plugins Do with just Vim'
@@ -20,12 +22,47 @@
 "     
 "
 
+" Auto source .vimrc on exit
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
+
 " Don't act like Vi
 set nocompatible
 
+
+" ---- Vundle Set up ---- {{{
+
+"Set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+Plugin 'VundleVim/Vundle.vim'  " required
+
+" Plugins:
+" <============================================>
+" Specify the plugins you want to install here.
+" We'll come on that later
+" <============================================>
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" }}} ---- Vundle Setup ends here ---
+
 " Enable syntax highlighting
 syntax enable
-filetype plugin on
+"filetype plugin on
 
 " A common remapping of the leader key for extra functionality
 " Referred to as <leader>
@@ -40,9 +77,89 @@ set wildmenu
 " Enable tag matching upon <C-]> (e.g. with ctags)
 set tags+=tags;$HOME
 
+" Intuitive copy and paste
+set pastetoggle=<F2>
+set clipboard=unnamed
+
+" Easier switching between files
+set hidden
+
+" Use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
+
+" Allow backspacing over autoindent, line breaks and start of insert action
+set backspace=indent,eol,start
+ 
+" When opening a new line and no filetype-specific indenting is enabled, keep
+" the same indent as the line you're currently on. Useful for READMEs, etc.
+set autoindent
+ 
+" Stop certain movements from always going to the first character of a line.
+set nostartofline
+ 
+" Display the cursor position on the last line of the screen or in the status
+" line of a window
+set ruler
+ 
+" Always display the status line, even if only one window is displayed
+set laststatus=2
+ 
+" Instead of failing a command because of unsaved changes, instead raise a
+" dialogue asking if you wish to save changed files.
+set confirm
+ 
+" Use visual bell instead of beeping when doing something wrong, and unset
+" it to do nothing
+set visualbell
+set t_vb=
+ 
+" Enable use of the mouse for all modes
+set mouse=a
+ 
+" Set the command window height to 2 lines, to avoid many cases of having to
+" 'press <Enter> to continue'
+set cmdheight=2
+ 
+" Display line numbers on the left
+set number
+ 
+" Quickly time out on keycodes, but never time out on mappings
+set notimeout ttimeout ttimeoutlen=200
+ 
+" Indentation settings for using 4 spaces instead of tabs.
+" Do not change 'tabstop' from its default value of 8 with this setup.
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+ 
+"------------------------------------------------------------
+" Mappings {{{1
+"
+" Useful mappings
+ 
+" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
+" which is the default
+map Y y$
+ 
+" Map <C-L> (redraw screen) to also turn off search highlighting until the
+" next search
+nnoremap <C-L> :nohl<CR><C-L>
+ 
+
+" Map // to search for visually selected text
+vnoremap // y/<C-R>"<CR>
+"------------------------------------------------------------
+
+
+"------------------------------------------------------------
+" Highlight text that goes over 80 character width
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+"------------------------------------------------------------
 
 "----------------------------------------------------------------------------
-" Python Specific
+" Python Specific (replace with plugins?)
 "----------------------------------------------------------------------------
 
 " Low maintenance snippet manager
