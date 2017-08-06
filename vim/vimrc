@@ -1,5 +1,3 @@
-colorscheme sweyla941432
-
 " URL: http://github.com/sjsawyer/vim/vimrc
 " Author: Shaun Sawyer
 " Descripion:
@@ -28,11 +26,14 @@ augroup reload_vimrc " {
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
 
-" Don't act like Vi
+" Don't act like Vi  (required before Vundle setup)
 set nocompatible
 
 
-" ---- Vundle Set up ---- {{{
+"------------------------------------------------------------------------------
+" Vundle Setup
+"
+" Must be included near the beginning of .vimrc
 
 "Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -44,10 +45,9 @@ Plugin 'VundleVim/Vundle.vim'  " required
 
 " Plugins:
 " <============================================>
-" Specify the plugins you want to install here.
-" We'll come on that later
+" Add plugins here
+"
 " <============================================>
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -58,15 +58,15 @@ filetype plugin indent on    " required
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" }}} ---- Vundle Setup ends here ---
+
+
+"------------------------------------------------------------------------------
+" Features
+"
+" Nice to have options
 
 " Enable syntax highlighting
 syntax enable
-"filetype plugin on
-
-" A common remapping of the leader key for extra functionality
-" Referred to as <leader>
-:let mapleader = ","
 
 " Search into subdirectories
 set path+=**
@@ -133,11 +133,16 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
  
-"------------------------------------------------------------
-" Mappings {{{1
+
+"------------------------------------------------------------------------------
+" Mappings
 "
-" Useful mappings
+" Bind common and useful tasks to key combinations
  
+" A common remapping of the leader key for extra functionality
+" Referred to as <Leader>
+:let mapleader = ","
+
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
 map Y y$
@@ -145,22 +150,36 @@ map Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
- 
 
 " Map // to search for visually selected text
 vnoremap // y/<C-R>"<CR>
-"------------------------------------------------------------
+
+" Map sort
+vnoremap <Leader>s :sort<CR>
+
+" Easier block indenting
+vnoremap < <gv
+vnoremap > >gv
 
 
-"------------------------------------------------------------
+"------------------------------------------------------------------------------
+" Color
+"
+" Pertaining to the coloring of the visual layout of vim
+
 " Highlight text that goes over 80 character width
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
-"------------------------------------------------------------
+"set colorcolumn=80  " include this line for an actual column
 
-"----------------------------------------------------------------------------
-" Python Specific (replace with plugins?)
-"----------------------------------------------------------------------------
+" Color scheme (must exist in ./.vim/colors)
+colorscheme sweyla941432
+
+
+"------------------------------------------------------------------------------
+" Python Specific
+"
+" Replace with vundle plugins?
 
 " Low maintenance snippet manager
 nnoremap ,pdb :-1read ./vim/snippets/python.pdb<CR>$
