@@ -1,0 +1,14 @@
+# FFmpeg Functions
+
+# stack two videos side by side with ffmpeg
+function hstack() {
+  ffmpeg -i "$1" -i "$2" -filter_complex "[0:v][1:v]hstack=inputs=2[v]; [0:a][1:a]amerge[a]" -map "[v]" -map "[a]" -ac 2 hstacked.mp4
+}
+
+# Terminal Text to Speech (alert: hacky)
+# Should probably use ffplay
+function say() {
+    ffmpeg -v quiet -f lavfi -i flite=text="$1" h58dhf923.wav \
+        && aplay h58dhf923.wav 2>/dev/null \
+        && rm h58dhf923.wav
+}

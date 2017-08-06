@@ -1,0 +1,4 @@
+# Octave Aliases
+
+# run octave with no gui
+alias octavee='octave --no-gui'

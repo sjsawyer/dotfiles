@@ -1,0 +1,5 @@
+# youtube-dl aliases
+
+alias youtube-dl-a='youtube-dl -x --audio-format wav'
+alias youtube-dl-v='youtube-dl -f 22'
+

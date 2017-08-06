@@ -1,0 +1,30 @@
+# Bash Aliases
+
+# fix permissions if docker ran as root with mounted directory
+alias fixperms='sudo chown -R $USER:$USER .'
+
+# restart network manager if wifi is on but no networks appear
+alias fixwifi='sudo service network-manager restart'
+
+# try this if trackpad stops working
+alias fixtp='synclient TouchpadOff=0'
+
+# command for searching within .py files
+alias grepp='grep -r --include \*.py'
+alias grepl='grep -r --include \*.log'
+alias grep="grep -I --color=auto"
+
+# using find with regex automatically enabled
+alias findr='find . -regex'
+
+# open a file using the default program
+alias dopen='xdg-open'
+
+
+# useful for installing things that have make files
+alias configure='./configure && make && make install'
+
+# xclip - clipboard utility
+alias clp='xclip -sel clip'
+
+

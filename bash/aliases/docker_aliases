@@ -1,0 +1,10 @@
+# Docker Aliases
+
+# Run bash in latest running container
+alias redock='docker exec -it $(docker ps -lq) bash'
+
+# Removing containers, images
+alias drmi='docker images -f dangling=true -q | xargs docker rmi'
+alias drm='docker ps -aq | xargs docker rm'
+alias ds='docker ps -aq | xargs docker stop'
+
