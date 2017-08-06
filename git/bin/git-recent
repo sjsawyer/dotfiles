@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Parse for value supplied to optional argument -n, indicating
+# how far back in the reflog we should check for git branches
+
+nhead=20
+while getopts ":n:" opt; do
+  case $opt in
+    n)
+      nhead=${OPTARG}
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+git reflog | head -n${nhead} | grep -oP '(?<= to ).*' | sed 's/refs\/heads\///g' | sort -u
+
+
+
+

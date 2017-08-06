@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# git branches
+# List all branches for the current project, as well as their
+# respective authors
+
+git for-each-ref \
+    --format=' %(authorname) %09 %(refname)' \
+    --sort=authorname
+

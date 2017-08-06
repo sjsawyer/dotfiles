@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# git authors
+# List all authors on a particular git project
+
+git log --format='%aN' | sort -u
+

@@ -1,0 +1,22 @@
+[user]
+	email = shaun@rave.io
+	name = Shaun
+[core]
+	editor = vim
+[push]
+	default = current
+
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    up = remote update -p
+    ff = merge --ff-only
+    br = rev-parse --abbrev-ref HEAD
+    last = log -1 HEAD
+    please = push --force-with-lease
+    pullr = pull --rebase
+    commend = commit --amend
+    conflic = diff --name-only --diff-filter=U
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --tags --remotes
+
