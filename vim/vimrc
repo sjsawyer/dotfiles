@@ -132,6 +132,9 @@ set notimeout ttimeout ttimeoutlen=200
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+" Highlight all search matches
+:set hlsearch
  
 
 "------------------------------------------------------------------------------
