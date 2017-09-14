@@ -23,6 +23,10 @@
     commend = commit --amend
     conflic = diff --name-only --diff-filter=U
     l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --tags --remotes
+    both-merged = !git-both-merged
+    branches = !git-branches
+    recent = !git-recent
+    authors = !git-authors
 
 # filter for converting tabs to spaces
 [filter "spacify"]
