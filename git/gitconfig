@@ -24,3 +24,11 @@
     conflic = diff --name-only --diff-filter=U
     l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --tags --remotes
 
+# filter for converting tabs to spaces
+[filter "spacify"]
+    clean = expand --initial -t 4
+    smudge = expand --initial -t 4
+    required
+[merge]
+    renormalize = true
+
