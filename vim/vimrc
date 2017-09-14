@@ -132,6 +132,8 @@ set notimeout ttimeout ttimeoutlen=200
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+" When indenting using >> or <<, will indent to next multple of `shiftwidth`
+set shiftround
 
 " Highlight all search matches
 :set hlsearch
