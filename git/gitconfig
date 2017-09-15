@@ -36,3 +36,7 @@
 [merge]
     renormalize = true
 
+# Apply color code output when redirecting output
+# May cause problems if receiving pipe does not expect color-coded input
+[color]
+    ui = true
