@@ -27,6 +27,8 @@
     branches = !git-branches
     recent = !git-recent
     authors = !git-authors
+    abort = !git-abort
+    continue = !git-continue
 
 # filter for converting tabs to spaces
 [filter "spacify"]

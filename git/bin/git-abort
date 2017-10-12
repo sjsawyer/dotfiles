@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# git continue
+# Continue the current operation currently being done in git when conflicts arise
+# E.g. rebase, cherry-pick, revert, etc.
+
+operation=`git status | grep -Po '[a-z]+(?= --continue)'`
+
+if [ -z ${operation} ]; then
+    echo "No operation to continue"
+else
+    echo "Continuing ${operation}..." && git ${operation} --continue
+fi
+
