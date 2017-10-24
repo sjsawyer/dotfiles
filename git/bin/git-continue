@@ -1,15 +1,14 @@
 #!/bin/sh
 
-# git abort
-# Abort the current operation currently being done in git when conflicts arise
+# git continue
+# Continue the current operation currently being done in git when conflicts arise
 # E.g. rebase, cherry-pick, revert, etc.
 
-#git `git st | grep abort | grep -oP '"git \K[^"]+'`
+operation=`git status | grep -Po '[a-z]+(?= --continue)'`
 
-operation=`git status | grep -Po '[a-z]+(?= --abort)'`
 if [ -z ${operation} ]; then
-    echo "No operation to abort"
+    echo "No operation to continue"
 else
-    git ${operation} --abort && echo "${operation} aborted"
+    echo "Continuing ${operation}..." && git ${operation} --continue
 fi
 
