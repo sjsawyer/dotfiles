@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git st | grep -Po "(?<=modified:   ).*" | xargs -n1 git add
+

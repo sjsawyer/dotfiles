@@ -30,6 +30,7 @@
     authors = !git-authors
     abort = !git-abort
     continue = !git-continue
+    addmodified = !git-addmodified
 
 # filter for converting tabs to spaces
 [filter "spacify"]
