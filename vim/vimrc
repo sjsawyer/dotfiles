@@ -46,7 +46,8 @@ Plugin 'VundleVim/Vundle.vim'  " required
 Plugin 'sickill/vim-monokai'
 Plugin 'joshdick/onedark.vim'
 Plugin 'sheerun/vim-polyglot'  " improved syntax hilighting
-
+"Plugin 'kevinw/pyflakes-vim'  " python syntax checking
+Plugin 'vim-syntastic/syntastic'  " syntax checking
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -58,6 +59,11 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
+
+"-----------------------------------------------------------------------------'
+" Plugin Specific Configuration
+
+let g:syntastic_python_checkers = ['flake8']
 
 "------------------------------------------------------------------------------
 " Features
