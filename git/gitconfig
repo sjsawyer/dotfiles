@@ -44,3 +44,6 @@
 # May cause problems if receiving pipe does not expect color-coded input
 [color]
     ui = true
+[branch]
+    autosetupmerge = always   # implies --track option with git checkout
+    autosetuprebase = always  # use git pull --rebase
