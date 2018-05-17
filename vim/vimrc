@@ -193,6 +193,6 @@ colorscheme onedark
 " Replace with vundle plugins?
 
 " Low maintenance snippet manager
-nnoremap ,pdb :-1read ./vim/snippets/python.pdb<CR>$
-nnoremap ,main :-1read ./vim/snippets/python.main<CR>2j$i
+nnoremap ,main G:read ~/.vim/snippets/python.mainj4la
+nnoremap ,pdb oimport pdb; pdb.set_trace()
 
