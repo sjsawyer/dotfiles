@@ -18,6 +18,7 @@
     ff = merge --ff-only
     br = rev-parse --abbrev-ref HEAD
     cmm = commit -m
+    cp = cherry-pick -x
     last = log -1 HEAD
     please = push --force-with-lease
     pullr = pull --rebase
