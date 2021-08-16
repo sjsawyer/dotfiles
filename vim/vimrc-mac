@@ -1,0 +1,221 @@
+set nocompatible              " required
+filetype off                  " required
+
+" Automatically source vimrc on save.
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+
+" Ignore certain files (affects CtrlP, NERDTree, ...)
+set wildignore+=*.pyc,*/.mypy_cache/*
+
+" store swp files in one place
+" [https://vi.stackexchange.com/questions/177/what-is-the-purpose-of-swap-files]
+set directory^=$HOME/.vim/swap//
+
+" Enable copying to clipboard
+set clipboard=unnamed
+
+" <F2> to toggle paste mode
+set pastetoggle=<F2>
+
+" For some reason need this or else backspacing sometimes won't work
+set backspace=indent,eol,start
+
+" close 
+command Close pclose | lclose | cclose"
+
+" enable generic syntax highlighting
+let python_highlight_all=1
+syntax on
+
+" set <leader> to ,
+let mapleader = ","
+
+" line numbering
+set nu
+
+" lower case insensitive seach, upper case sensitive (require both)
+set ignorecase
+set smartcase
+
+" Use visual bell instead of beeping when doing something wrong, and unset it
+" to do nothing
+set visualbell
+set t_vb=
+
+" Set the command window height to 2 lines, to avoid many cases of having to
+" 'press <Enter> to continue'
+set cmdheight=2
+
+" allow switching files while edited
+set hidden
+
+" Instead of failing a command because of unsaved changes, instead raise a
+" dialogue asking if you wish to save changed files.
+set confirm
+
+" enable mouse mode
+set ttymouse=xterm2
+set mouse=a
+
+" NOTE: commented out because powerline enabled
+"" Always display status line set laststatus=2 " Status line display format
+"set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+
+set t_Co=256
+let g:solarized_termcolors=16
+set background=dark
+colorscheme solarized
+
+" toggle background via ,bg
+map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark")<CR>
+
+" Hilight all search matches
+set hlsearch
+" Map <C-L> (redraw screen) to also turn off search highlighting until the
+" next search
+nnoremap <C-L> :nohl<CR><C-L>
+
+" highlight as you are adding to your search
+set incsearch
+
+" start scrolling when you are `n` characters away from top/bottom
+set scrolloff=8
+
+"split navigations nnoremap <C-J> <C-W><C-J> nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L> nnoremap <C-H> <C-W><C-H>
+
+" Enable folding; NOTE: Currently not working?
+set foldmethod=indent
+set foldlevel=99
+
+" Specify encodingset
+set encoding=utf-8
+
+" Universal text formatting stuff (may be overwritten below)
+set autoindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
+
+" Map // to search for visually selected text
+vnoremap // y/<C-R>"<CR>
+" Map Ctrl-f to search files from current dir for current text under cursor
+nnoremap <C-f> :grep -F "<C-R><C-W>"<CR>
+vnoremap <C-f> "ay:grep -F "<C-r>a"<CR>
+
+" Extension specific
+au BufNewFile,BufRead *.py set
+    \ textwidth=79
+    \ fileformat=unix
+    \ colorcolumn=80
+au BufNewFile,BufRead *.java set
+    \ textwidth=100
+    \ colorcolumn=101
+au BufNewFile,BufRead *.rst set
+    \ textwidth=80
+    \ colorcolumn=81
+au BufNewFile,BufRead *.md set
+    \ textwidth=80
+    \ colorcolumn=81
+au BufNewFile,BufRead *.y{,a}ml{,.j2} set
+    \ syntax=yaml
+    \ tabstop=2
+    \ softtabstop=2
+    \ shiftwidth=2
+
+" Easier visual select block indenting
+vnoremap < <gv vnoremap > >gv
+
+" Flag extra whitespace
+highlight BadWhitespace ctermfg=16 ctermbg=253 guifg=#000000 guibg=#F8F8F0
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" add all your plugins here (note older versions of Vundle used Bundle instead
+" of Plugin)
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'lifepillar/vim-solarized8'
+Plugin 'scrooloose/nerdtree'
+Plugin 'hashivim/vim-terraform'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'vimwiki/vimwiki'
+Plugin 'cespare/vim-toml'  " toml file syntax highlighting
+Plugin 'elixir-editors/vim-elixir'  " elixir syntax highlight
+Plugin '907th/vim-auto-save'
+Plugin 'preservim/tagbar'
+Plugin 'sheerun/vim-polyglot' " for many languages and plugins
+Plugin 'overcache/NeoSolarized'
+Plugin 'bfrg/vim-cpp-modern'
+Plugin 'mileszs/ack.vim'
+
+" ...
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" Plugin Specific Modifications
+
+" nerdtree
+
+" open automatically when vim starts autocmd vimenter * NERDTree How can I
+" open a NERDTree automatically when vim starts up if no files were specified?
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Specific mapping to open nerdtree
+map <C-n> :NERDTreeToggle<CR>
+" Close vim if only window open is nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" bd will close vim when NERDTree is open which is annoying
+command Bd bp\|bd <CR>
+
+" ctrlp
+
+" show hidden files
+let g:ctrlp_show_hidden = 1
+
+" Powerline
+source /usr/local/lib/python3.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+set laststatus=2
+
+" Syntastic
+let g:syntastic_python_python_exec = 'python3'
+
+" vim-auto-save
+let g:auto_save        = 1
+let g:auto_save_silent = 1
+let g:auto_save_events = ["InsertLeave", "TextChanged", "FocusLost"]
+
+" tagbar: open/close
+map <Leader>t :TagbarToggle<CR>
+
+" Ack: use ag instead
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+" And don't jump to first result automatically
+cnoreabbrev Ack Ack!
+" leader a for Ack
+nnoremap <Leader>a :Ack!<Space>
+
+" For some reason need to explicitly source for vim-elixir
+so ~/.vim/bundle/vim-elixir/*.vim
+
+" MACROS Steps to record a macro: 1. record into a register, e.g. q 2. map
+" <Leader><[keystrokes]> [macro-contents] Get macro contents via "qp
+
+" pdb
+map <Leader>pdb oimport pdb; pdb.set_trace()€ýa
