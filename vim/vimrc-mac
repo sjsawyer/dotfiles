@@ -5,7 +5,7 @@ filetype off                  " required
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " Ignore certain files (affects CtrlP, NERDTree, ...)
-set wildignore+=*.pyc,*/.mypy_cache/*
+set wildignore+=*.pyc,*/.mypy_cache/*,*.wav,*.flac
 
 " store swp files in one place
 " [https://vi.stackexchange.com/questions/177/what-is-the-purpose-of-swap-files]
