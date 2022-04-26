@@ -20,8 +20,9 @@ set pastetoggle=<F2>
 " For some reason need this or else backspacing sometimes won't work
 set backspace=indent,eol,start
 
-" close 
+" close (close quickfix window, local location list window, or whatever pclose does)
 command Close pclose | lclose | cclose"
+command Cl    pclose | lclose | cclose"
 
 " enable generic syntax highlighting
 let python_highlight_all=1
@@ -84,6 +85,10 @@ set scrolloff=8
 "split navigations nnoremap <C-J> <C-W><C-J> nnoremap <C-K> <C-W><C-K>
 "nnoremap <C-L> <C-W><C-L> nnoremap <C-H> <C-W><C-H>
 
+" Cycle through buffers with left right arrows
+nmap <Right> :bn<CR>
+nmap <Left> :bp<CR>
+
 " Enable folding; NOTE: Currently not working?
 set foldmethod=indent
 set foldlevel=99
@@ -105,32 +110,16 @@ vnoremap // y/<C-R>"<CR>
 nnoremap <C-f> :grep -F "<C-R><C-W>"<CR>
 vnoremap <C-f> "ay:grep -F "<C-r>a"<CR>
 
-" Extension specific
-au BufNewFile,BufRead *.py set
-    \ textwidth=79
-    \ fileformat=unix
-    \ colorcolumn=80
-au BufNewFile,BufRead *.java set
-    \ textwidth=100
-    \ colorcolumn=101
-au BufNewFile,BufRead *.rst set
-    \ textwidth=80
-    \ colorcolumn=81
-au BufNewFile,BufRead *.md set
-    \ textwidth=80
-    \ colorcolumn=81
-au BufNewFile,BufRead *.y{,a}ml{,.j2} set
-    \ syntax=yaml
-    \ tabstop=2
-    \ softtabstop=2
-    \ shiftwidth=2
-
 " Easier visual select block indenting
 vnoremap < <gv vnoremap > >gv
 
 " Flag extra whitespace
 highlight BadWhitespace ctermfg=16 ctermbg=253 guifg=#000000 guibg=#F8F8F0
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" https://vim.fandom.com/wiki/Move_to_next/previous_line_with_same_indentation
+nnoremap <M-,> :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
+nnoremap <M-.> :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -193,6 +182,9 @@ set laststatus=2
 
 " Syntastic
 let g:syntastic_python_python_exec = 'python3'
+" send errors to location list
+" (can switch bw using lnext and lprev; no need to execute :Errors)
+let g:syntastic_always_populate_loc_list = 1  
 
 " vim-auto-save
 let g:auto_save        = 1
@@ -219,3 +211,33 @@ so ~/.vim/bundle/vim-elixir/*.vim
 
 " pdb
 map <Leader>pdb oimport pdb; pdb.set_trace()€ýa
+" apply quotes and similar to word
+map <Leader>q` bi`<Esc>ea`<Esc>
+map <Leader>q" bi"<Esc>ea"<Esc>
+map <Leader>q' bi'<Esc>ea'<Esc>
+map <Leader>qb bi(<Esc>ea)<Esc>
+map <Leader>q( bi(<Esc>ea)<Esc>
+map <Leader>q{ bi{<Esc>ea}<Esc>
+map <Leader>q[ bi[<Esc>ea]<Esc>
+
+
+" Extension specific (override any plugins)
+au BufNewFile,BufRead *.py set
+    \ textwidth=79
+    \ fileformat=unix
+    \ colorcolumn=80
+au BufNewFile,BufRead *.java set
+    \ textwidth=100
+    \ colorcolumn=101
+au BufNewFile,BufRead *.rst set
+    \ textwidth=80
+    \ colorcolumn=81
+au BufNewFile,BufRead *.md set
+    \ textwidth=80
+    \ colorcolumn=81
+au BufNewFile,BufRead *.y{,a}ml{,.j2} set
+    \ syntax=yaml
+    \ tabstop=2
+    \ softtabstop=2
+    \ shiftwidth=2
+
