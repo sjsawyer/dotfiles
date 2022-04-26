@@ -20,8 +20,4 @@ while getopts ":n:" opt; do
   esac
 done
 
-git reflog | head -n${nhead} | grep -oP '(?<= to ).*' | sed 's/refs\/heads\///g' | sort -u
-
-
-
-
+git reflog | grep 'checkout:' | head | awk '{print $8}' | awk '!x[$0]++'
